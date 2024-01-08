@@ -67,3 +67,23 @@ class FileStorage:
     def close(self):
         # Reload
         self.reload()
+
+    def get(self, cls, id):
+        #  method to retrieve one object:
+        objs = FileStorage.all(self, cls)
+        if not id:
+            return (None)
+        else:
+            key = cls.__name__ + "." + str(id)
+        if key in objs:
+            return (objs[key])
+        else:
+            return (None)
+
+    def count(self, cls=None):
+        # Count the number of instance of a class
+        if not cls:
+            objs = FileStorage.all(self)
+        else:
+            objs = FileStorage.all(self, cls)
+        return (len(objs))

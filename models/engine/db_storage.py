@@ -76,3 +76,23 @@ class DBStorage():
     def close(self):
         # close a session
         self.__session.close()
+
+    def get(self, cls, id):
+        #  method to retrieve one object:
+        objs = DBStorage.all(self, cls)
+        if not id:
+            return (None)
+        else:
+            key = cls.__name__ + "." + str(id)
+        if key in objs:
+            return (objs[key])
+        else:
+            return (None)
+
+    def count(self, cls=None):
+        # Count the number of instance of a class
+        if not cls:
+            objs = DBStorage.all(self)
+        else:
+            objs = DBStorage.all(self, cls)
+        return (len(objs))
