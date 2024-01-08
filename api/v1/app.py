@@ -9,7 +9,8 @@ from api.v1.views import app_views
 
 app = Flask(__name__)
 app.register_blueprint(app_views, url_prefix="/api/v1")
-
+""" import cities """
+from api.v1.views.cities import *
 
 @app.teardown_appcontext
 def teardown_db(exception):
