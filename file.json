@@ -1,0 +1,114 @@
+{
+    "State.2113c0cd-37f0-4929-bdc9-ca5bb74f78d6": {
+        "id": "2113c0cd-37f0-4929-bdc9-ca5bb74f78d6",
+        "created_at": "2023-11-23T10:33:43.570794",
+        "updated_at": "2023-11-23T10:33:43.570807",
+        "name": "California",
+        "__class__": "State"
+    },
+    "City.2b71e430-19ac-432e-95ed-a328e0e6f97e": {
+        "id": "2b71e430-19ac-432e-95ed-a328e0e6f97e",
+        "created_at": "2023-11-23T10:33:43.571124",
+        "updated_at": "2023-11-23T10:33:43.571137",
+        "state_id": "2113c0cd-37f0-4929-bdc9-ca5bb74f78d6",
+        "name": "Fremont",
+        "__class__": "City"
+    },
+    "User.9e9fba39-526f-4588-a6fe-98c50625e8d1": {
+        "id": "9e9fba39-526f-4588-a6fe-98c50625e8d1",
+        "created_at": "2023-11-23T10:33:43.571421",
+        "updated_at": "2023-11-23T10:33:43.571429",
+        "email": "a@a.com",
+        "password": "pwd",
+        "first_name": "fn",
+        "last_name": "ln",
+        "__class__": "User"
+    },
+    "User.44e7d140-fb1f-4963-b7ff-9fb281d68731": {
+        "id": "44e7d140-fb1f-4963-b7ff-9fb281d68731",
+        "created_at": "2023-11-23T10:33:43.572087",
+        "updated_at": "2023-11-23T10:33:43.572096",
+        "email": "b@b.com",
+        "password": "pwd2",
+        "first_name": "fn2",
+        "last_name": "ln2",
+        "__class__": "User"
+    },
+    "Place.44064046-21c2-48ed-83e9-053449922c0e": {
+        "id": "44064046-21c2-48ed-83e9-053449922c0e",
+        "created_at": "2023-11-23T10:33:43.572358",
+        "updated_at": "2023-11-23T10:33:43.572366",
+        "city_id": "2b71e430-19ac-432e-95ed-a328e0e6f97e",
+        "user_id": "9e9fba39-526f-4588-a6fe-98c50625e8d1",
+        "name": "House",
+        "__class__": "Place"
+    },
+    "Review.5802856c-7e28-42a9-9a33-8478a0818797": {
+        "id": "5802856c-7e28-42a9-9a33-8478a0818797",
+        "created_at": "2023-11-23T10:33:43.572681",
+        "updated_at": "2023-11-23T10:33:43.572690",
+        "place_id": "44064046-21c2-48ed-83e9-053449922c0e",
+        "user_id": "44e7d140-fb1f-4963-b7ff-9fb281d68731",
+        "text": "Amazing",
+        "__class__": "Review"
+    },
+    "State.63f467fe-5152-49dd-875c-a02b0772e72e": {
+        "id": "63f467fe-5152-49dd-875c-a02b0772e72e",
+        "created_at": "2023-11-23T10:37:51.612909",
+        "updated_at": "2023-11-23T10:37:51.612916",
+        "name": "California",
+        "__class__": "State"
+    },
+    "City.c1dc0dc9-9c32-4d45-81ea-e3dcec9b4655": {
+        "id": "c1dc0dc9-9c32-4d45-81ea-e3dcec9b4655",
+        "created_at": "2023-11-23T10:37:51.613326",
+        "updated_at": "2023-11-23T10:37:51.613334",
+        "state_id": "63f467fe-5152-49dd-875c-a02b0772e72e",
+        "name": "Fremont",
+        "__class__": "City"
+    },
+    "User.d5d2eb96-4c75-453d-97cb-1a078b93d0da": {
+        "id": "d5d2eb96-4c75-453d-97cb-1a078b93d0da",
+        "created_at": "2023-11-23T10:37:51.614019",
+        "updated_at": "2023-11-23T10:37:51.614028",
+        "email": "a@a.com",
+        "password": "pwd",
+        "first_name": "fn",
+        "last_name": "ln",
+        "__class__": "User"
+    },
+    "User.a75dfd99-b491-4181-a440-a0c79ebc2511": {
+        "id": "a75dfd99-b491-4181-a440-a0c79ebc2511",
+        "created_at": "2023-11-23T10:37:51.614472",
+        "updated_at": "2023-11-23T10:37:51.614479",
+        "email": "b@b.com",
+        "password": "pwd2",
+        "first_name": "fn2",
+        "last_name": "ln2",
+        "__class__": "User"
+    },
+    "Place.e0a57362-2f9e-4e1b-b588-da42f41d6552": {
+        "id": "e0a57362-2f9e-4e1b-b588-da42f41d6552",
+        "created_at": "2023-11-23T10:37:51.614813",
+        "updated_at": "2023-11-23T10:37:51.614821",
+        "city_id": "c1dc0dc9-9c32-4d45-81ea-e3dcec9b4655",
+        "user_id": "d5d2eb96-4c75-453d-97cb-1a078b93d0da",
+        "name": "House",
+        "__class__": "Place"
+    },
+    "Review.7f38f88d-467f-471d-9dd1-432f6ab6851d": {
+        "id": "7f38f88d-467f-471d-9dd1-432f6ab6851d",
+        "created_at": "2023-11-23T10:37:51.615134",
+        "updated_at": "2023-11-23T10:37:51.615141",
+        "place_id": "e0a57362-2f9e-4e1b-b588-da42f41d6552",
+        "user_id": "a75dfd99-b491-4181-a440-a0c79ebc2511",
+        "__class__": "Review"
+    },
+    "State.9d91657d-396d-437c-b999-ec42be96b95c": {
+        "id": "9d91657d-396d-437c-b999-ec42be96b95c",
+        "created_at": "2023-11-23T11:27:04.624553",
+        "updated_at": "2023-11-23T11:27:04.624563",
+        "name": "Grand Casa",
+        "__class__": "State"
+    }
+}
