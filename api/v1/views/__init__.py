@@ -1,46 +1,70 @@
 #!/usr/bin/pyhon3
 '''the blueprint for the API.'''
 from flask import Flask, Blueprint
-from api.v1.views import app_views
+from flask import jsonify, url_for, redirect, abort, request
 from models import storage
 from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
-from models.user import User
-from flask import jsonify
-
 
 app_views = Blueprint('app_views', __name__, url_prefix='/api/v1')
-# from api.v1.views.index import *
+from api.v1.views.index import *
 # from api.v1.views.states import *
 # from api.v1.views.cities import *
 # from api.v1.views.amenities import *
 
 
-@app_views.route("/status", strict_slashes=False)
-def status():
-    return {
-        "status": "OK",
-    }
+methods_state = ["GET", "POST"]
 
 
-@app_views.route("/stats", strict_slashes=False)
-def stats():
-    """ for no reason """
-    amenities = storage.count(Amenity)
-    cities = storage.count(City)
-    places = storage.count(Place)
-    reviews = storage.count(Review)
-    states = storage.count(State)
-    users = storage.count(User)
-    dic = {
-        "amenities": amenities,
-        "cities": cities,
-        "places": places,
-        "reviews": reviews,
-        "states": states,
-        "users": users,
-    }
-    return jsonify(dic)
+@app_views.route('/states/', strict_slashes=False, methods=methods_state)
+def state_api():
+    """ just a discription"""
+    if request.method == 'GET':
+        states = storage.all('State')
+        states_to_dict_list = []
+        for key, value in states.items():
+            states_to_dict_list.append(value.to_dict())
+        return jsonify(states_to_dict_list)
+
+    if request.method == 'POST':
+        data_json = request.get_json(force=True, silent=True)
+        if not data_json:
+            abort(400, "Not a JSON")
+        if "name" not in data_json:
+            abort(400, "Missing name")
+        new_state = State(**data_json)
+        new_state.save()
+        return jsonify(new_state.to_dict()), 201
+
+
+methods_state_id = ["GET", "DELETE", "PUT"]
+
+
+@app_views.route('/states/<state_id>', strict_slashes=False,
+                 methods=methods_state_id)
+def state_by_id(state_id):
+    # Retrieve a state
+    state = storage.get('State', state_id)
+    if not state:
+        abort(404)
+
+    if request.method == 'GET':
+        return jsonify(state.to_dict())
+
+    elif request.method == 'DELETE':
+        # Delete a state
+        storage.delete(state)
+        storage.save()
+        return jsonify({}), 200
+
+    elif request.method == 'PUT':
+        json_data = request.get_json(force=True, silent=True)
+        if not json_data:
+            abort(400, "Not a JSON")
+        for key, value in json_data.items():
+            if key == 'id' or key == 'created_at'\
+                    or key == 'updated_at':
+                continue
+            else:
+                state.__dict__[key] = value
+        state.save()
+        return jsonify(state.to_dict()), 200
