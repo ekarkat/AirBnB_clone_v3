@@ -21,6 +21,7 @@ def status():
 
 @app_views.route("/stats", strict_slashes=False)
 def stats():
+    """ for no reason """
     amenities = storage.count(Amenity)
     cities = storage.count(City)
     places = storage.count(Place)
