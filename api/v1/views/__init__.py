@@ -11,7 +11,7 @@ from api.v1.views.index import *
 from api.v1.views.states import *
 
 """ this is for state"""
-from api.v1.views.cities import *
+# from api.v1.views.cities import *
 
 """ this is for state"""
 # from api.v1.views.amenities import *
