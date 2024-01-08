@@ -20,21 +20,21 @@ def status():
     }
 
 
-@app_views.route("/stats", strict_slashes=False)
-def stats():
-    """ for no reason """
-    amenities = storage.count(Amenity)
-    cities = storage.count(City)
-    places = storage.count(Place)
-    reviews = storage.count(Review)
-    states = storage.count(State)
-    users = storage.count(User)
-    dic = {
-        "amenities": amenities,
-        "cities": cities,
-        "places": places,
-        "reviews": reviews,
-        "states": states,
-        "users": users,
-    }
-    return jsonify(dic)
+# @app_views.route("/stats", strict_slashes=False)
+# def stats():
+#     """ for no reason """
+#     amenities = storage.count(Amenity)
+#     cities = storage.count(City)
+#     places = storage.count(Place)
+#     reviews = storage.count(Review)
+#     states = storage.count(State)
+#     users = storage.count(User)
+#     dic = {
+#         "amenities": amenities,
+#         "cities": cities,
+#         "places": places,
+#         "reviews": reviews,
+#         "states": states,
+#         "users": users,
+#     }
+#     return jsonify(dic)
