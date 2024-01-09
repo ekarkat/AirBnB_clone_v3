@@ -12,7 +12,7 @@ methods_city = ['GET', 'POST']
 @app_views.route('/states/<state_id>/cities', strict_slashes=False,
                  methods=methods_city)
 def state_cities(state_id):
-    # Retrieve a state cities
+    """ city route """
     state = storage.get('State', state_id)
     if not state:
         abort(404)
@@ -40,7 +40,7 @@ methods_city_id = ['GET', 'PUT', 'DELETE']
 @app_views.route('/cities/<city_id>', strict_slashes=False,
                  methods=methods_city_id)
 def city_id(city_id):
-    # city route
+    """ city route """
     city = storage.get(City, city_id)
     if not city:
         abort(404)
