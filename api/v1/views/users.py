@@ -22,15 +22,17 @@ def user_api():
             user_to_list.append(value.to_dict())
         return jsonify(user_to_list)
 
-#     if request.method == 'POST':
-#         data_json = request.get_json(force=True, silent=True)
-#         if not data_json:
-#             abort(400, "Not a JSON")
-#         if "name" not in data_json:
-#             abort(400, "Missing name")
-#         new_state = State(**data_json)
-#         new_state.save()
-#         return jsonify(new_state.to_dict()), 201
+    if request.method == 'POST':
+        data_json = request.get_json(force=True, silent=True)
+        if not data_json:
+            abort(400, "Not a JSON")
+        if "email" not in data_json:
+            abort(400, "Missing email")
+        if "password" not in data_json:
+            abort(400, "Missing password")
+        user = User(**data_json)
+        user.save()
+        return jsonify(user.to_dict()), 201
 
 
 # methods_state_id = ["GET", "DELETE", "PUT"]
