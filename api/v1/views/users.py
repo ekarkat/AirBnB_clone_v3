@@ -11,7 +11,6 @@ from models.user import User
 method = ['PUT', 'GET', 'POST', 'DELETE']
 
 
-
 @app_views.route('/users/', strict_slashes=False, methods=method)
 def user_api():
     """ just a discription"""
@@ -35,35 +34,32 @@ def user_api():
         return jsonify(user.to_dict()), 201
 
 
-# methods_state_id = ["GET", "DELETE", "PUT"]
+@app_views.route('/users/<user_id>', strict_slashes=False,
+                 methods=method)
+def user_by_id(user_id):
+    """ just a discription"""
+    user = storage.get('User', user_id)
+    if not user:
+        abort(404)
 
+    if request.method == 'GET':
+        return jsonify(user.to_dict())
 
-# @app_views.route('/states/<state_id>', strict_slashes=False,
-#                  methods=methods_state_id)
-# def state_by_id(state_id):
-#     """ just a discription"""
-#     state = storage.get('State', state_id)
-#     if not state:
-#         abort(404)
+    elif request.method == 'DELETE':
+        # Delete a state
+        storage.delete(user)
+        storage.save()
+        return jsonify({}), 200
 
-#     if request.method == 'GET':
-#         return jsonify(state.to_dict())
-
-#     elif request.method == 'DELETE':
-#         # Delete a state
-#         storage.delete(state)
-#         storage.save()
-#         return jsonify({}), 200
-
-#     elif request.method == 'PUT':
-#         json_data = request.get_json(force=True, silent=True)
-#         if not json_data:
-#             abort(400, "Not a JSON")
-#         for key, value in json_data.items():
-#             if key == 'id' or key == 'created_at'\
-#                     or key == 'updated_at':
-#                 continue
-#             else:
-#                 state.__dict__[key] = value
-#         state.save()
-#         return jsonify(state.to_dict()), 200
+    # elif request.method == 'PUT':
+    #     json_data = request.get_json(force=True, silent=True)
+    #     if not json_data:
+    #         abort(400, "Not a JSON")
+    #     for key, value in json_data.items():
+    #         if key == 'id' or key == 'created_at'\
+    #                 or key == 'updated_at':
+    #             continue
+    #         else:
+    #             user.__dict__[key] = value
+    #     user.save()
+    #     return jsonify(user.to_dict()), 200
