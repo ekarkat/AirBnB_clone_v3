@@ -51,15 +51,15 @@ def user_by_id(user_id):
         storage.save()
         return jsonify({}), 200
 
-    # elif request.method == 'PUT':
-    #     json_data = request.get_json(force=True, silent=True)
-    #     if not json_data:
-    #         abort(400, "Not a JSON")
-    #     for key, value in json_data.items():
-    #         if key == 'id' or key == 'created_at'\
-    #                 or key == 'updated_at':
-    #             continue
-    #         else:
-    #             user.__dict__[key] = value
-    #     user.save()
-    #     return jsonify(user.to_dict()), 200
+    elif request.method == 'PUT':
+        json_data = request.get_json(force=True, silent=True)
+        if not json_data:
+            abort(400, "Not a JSON")
+        for key, value in json_data.items():
+            if key == 'id' or key == 'created_at'\
+                    or key == 'updated_at':
+                continue
+            else:
+                user.__dict__[key] = value
+        user.save()
+        return jsonify(user.to_dict()), 200
