@@ -25,23 +25,23 @@ def review_api(place_id):
             review_list.append(review.to_dict())
         return jsonify(review_list)
 
-    # if request.method == 'POST':
-    #     review = storage.get('City', city_id)
-    #     if review is None:
-    #         abort(404)
-    #     data = request.get_json(force=True, silent=True)
-    #     if not data:
-    #         abort(400, "Not a JSON")
-    #     if "user_id" not in data:
-    #         abort(400, "Missing user_id")
-    #     user = storage.get(User, data["user_id"])
-    #     if not user:
-    #         abort(404)
-    #     if "name" not in data:
-    #         abort(400, "Missing name")
-    #     review = Place(city_id=review.id, **data)
-    #     review.save()
-    #     return jsonify(review.to_dict()), 201
+    if request.method == 'POST':
+        review = storage.get('City', city_id)
+        if review is None:
+            abort(404)
+        data = request.get_json(force=True, silent=True)
+        if not data:
+            abort(400, "Not a JSON")
+        if "user_id" not in data:
+            abort(400, "Missing user_id")
+        user = storage.get('User', data["user_id"])
+        if not user:
+            abort(404)
+        if "text" not in data:
+            abort(400, "Missing text")
+        review = Review(place_id=place_id, **data)
+        review.save()
+        return jsonify(review.to_dict()), 201
 
 
 @app_views.route('/reviews/<review_id>', strict_slashes=False,

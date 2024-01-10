@@ -34,12 +34,12 @@ def place_api(city_id):
             abort(400, "Not a JSON")
         if "user_id" not in data:
             abort(400, "Missing user_id")
-        user = storage.get(User, data["user_id"])
+        user = storage.get('User', data["user_id"])
         if not user:
             abort(404)
         if "name" not in data:
             abort(400, "Missing name")
-        place = Place(city_id=city.id, **data)
+        place = Place(city_id=city_id, **data)
         place.save()
         return jsonify(place.to_dict()), 201
 
