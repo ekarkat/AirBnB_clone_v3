@@ -17,21 +17,21 @@ def amenity_api():
         for key, value in storage.all(Amenity).items():
             am_dict.append(value.to_dict())
         return jsonify(am_dict)
-    if request.method == 'POST':
-        data_json = request.get_json(force=True, silent=True)
-        if not data_json:
-            abort(400, "Not a JSON")
-        if "name" not in data_json:
-            abort(400, "Missing name")
-        new_amen = Amenity(**data_json)
-        new_amen.save()
-        return jsonify(new_amen.to_dict()), 201
+    # if request.method == 'POST':
+    #     data_json = request.get_json(force=True, silent=True)
+    #     if not data_json:
+    #         abort(400, "Not a JSON")
+    #     if "name" not in data_json:
+    #         abort(400, "Missing name")
+    #     new_amen = Amenity(**data_json)
+    #     new_amen.save()
+    #     return jsonify(new_amen.to_dict()), 201
 
 
 @app_views.route("/amenities/<amenity_id>", strict_slashes=False,
                  methods=methods_am)
 def amenities_by_id(amenity_id):
-    amen = storage.get(Amenity, amenity_id)
+    amen = storage.get('Amenity', amenity_id)
     if not amen:
         abort(404)
 
