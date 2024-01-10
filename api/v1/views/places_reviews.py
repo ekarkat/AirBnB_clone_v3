@@ -26,8 +26,8 @@ def review_api(place_id):
         return jsonify(review_list)
 
     if request.method == 'POST':
-        review = storage.get('City', city_id)
-        if review is None:
+        place = storage.get('Place', place_id)
+        if place is None:
             abort(404)
         data = request.get_json(force=True, silent=True)
         if not data:
