@@ -46,7 +46,7 @@ def review_api(place_id):
 
 @app_views.route('/reviews/<review_id>', strict_slashes=False,
                  methods=method)
-def place_by_id(review_id):
+def review_by_id(review_id):
     """ just a discription"""
     review = storage.get(Review, review_id)
     if not review:
