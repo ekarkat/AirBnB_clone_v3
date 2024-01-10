@@ -11,12 +11,14 @@ methods_am = ['GET', 'POST', 'DELETE', 'PUT']
 
 @app_views.route("/amenities", strict_slashes=False, methods=methods_am)
 def amenity_api():
-    # get and post
+    """azeazeeeeeeeeeee"""
     if request.method == 'GET':
+        amens = storage.all(Amenity).items()
         am_dict = []
-        for key, value in storage.all(Amenity).items():
+        for key, value in amens:
             am_dict.append(value.to_dict())
         return jsonify(am_dict)
+
     # if request.method == 'POST':
     #     data_json = request.get_json(force=True, silent=True)
     #     if not data_json:
