@@ -19,7 +19,7 @@ def place_api(city_id):
         city = storage.get('City', city_id)
         place_list = []
         for place in city.places:
-            place_list.append(value.to_dict())
+            place_list.append(place.to_dict())
         return jsonify(place_list)
 
     if request.method == 'POST':
