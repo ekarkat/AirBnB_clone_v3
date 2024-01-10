@@ -23,17 +23,20 @@ def place_api(city_id):
         return jsonify(place_list)
 
     if request.method == 'POST':
-        data_json = request.get_json(force=True, silent=True)
-        if not data_json:
-            abort(400, "Not a JSON")
-        if "user_id" not in data_json:
-            abort(400, "Missing user_id")
-        if "name" not in data_json:
-            abort(400, "Missing name")
-
-        if not storage.get('User', data_json.get("user_id")):
+        city = storage.get('City', city_id)
+        if city is None:
             abort(404)
-        place = User(city_id=city_id, **data_json)
+        data = request.get_json(force=True, silent=True)
+        if not data:
+            abort(400, "Not a JSON")
+        if "user_id" not in data:
+            abort(400, "Missing user_id")
+        user = storage.get(User, data["user_id"])
+        if not user:
+            abort(404)
+        if "name" not in data:
+            abort(400, "Missing name")
+        place = Place(city_id=city.id, **data)
         place.save()
         return jsonify(place.to_dict()), 201
 
