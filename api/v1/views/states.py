@@ -59,6 +59,6 @@ def state_by_id(state_id):
                     or key == 'updated_at':
                 continue
             else:
-                state.__dict__[key] = value
+                setattr(state, key, value)
         state.save()
         return jsonify(state.to_dict()), 200

@@ -52,6 +52,6 @@ def amenities_by_id(amenity_id):
                     or key == 'updated_at':
                 continue
             else:
-                amen.__dict__[key] = value
+                setattr(amen, key, value)
         amen.save()
         return jsonify(amen.to_dict()), 200

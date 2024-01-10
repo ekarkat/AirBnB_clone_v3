@@ -5,7 +5,7 @@
 from api.v1.views import app_views
 from flask import abort, jsonify, request
 from models import storage
-from models.user import User
+from models.place import Place
 
 
 method = ['PUT', 'GET', 'POST', 'DELETE']
@@ -35,32 +35,32 @@ def place_api(city_id):
 #         return jsonify(user.to_dict()), 201
 
 
-# @app_views.route('/users/<user_id>', strict_slashes=False,
-#                  methods=method)
-# def user_by_id(user_id):
-#     """ just a discription"""
-#     user = storage.get('User', user_id)
-#     if not user:
-#         abort(404)
+@app_views.route('/places/<place_id>', strict_slashes=False,
+                 methods=method)
+def place_by_id(user_id):
+    """ just a discription"""
+    place = storage.get('Place', place_id)
+    if not place:
+        abort(404)
 
-#     if request.method == 'GET':
-#         return jsonify(user.to_dict())
+    if request.method == 'GET':
+        return jsonify(place.to_dict())
 
-#     elif request.method == 'DELETE':
-#         # Delete a state
-#         storage.delete(user)
-#         storage.save()
-#         return jsonify({}), 200
+    elif request.method == 'DELETE':
+        # Delete a state
+        storage.delete(place)
+        storage.save()
+        return jsonify({}), 200
 
-#     elif request.method == 'PUT':
-#         json_data = request.get_json(force=True, silent=True)
-#         if not json_data:
-#             abort(400, "Not a JSON")
-#         for key, value in json_data.items():
-#             if key == 'id' or key == 'created_at'\
-#                     or key == 'updated_at':
-#                 continue
-#             else:
-#                 user.__dict__[key] = value
-#         user.save()
-#         return jsonify(user.to_dict()), 200
+    elif request.method == 'PUT':
+        json_data = request.get_json(force=True, silent=True)
+        if not json_data:
+            abort(400, "Not a JSON")
+        for key, value in json_data.items():
+            if key == 'id' or key == 'created_at' or key == 'city_id'\
+                    or key == 'updated_at' or key == 'user_id':
+                continue
+            else:
+                setattr(place, key, value)
+        place.save()
+        return jsonify(place.to_dict()), 200

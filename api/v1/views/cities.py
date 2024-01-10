@@ -61,6 +61,6 @@ def city_id(city_id):
                     or key == 'updated_at':
                 continue
             else:
-                city.__dict__[key] = value
+                setattr(city, key, value)
         city.save()
         return jsonify(city.to_dict()), 200

@@ -60,6 +60,6 @@ def user_by_id(user_id):
                     or key == 'updated_at':
                 continue
             else:
-                user.__dict__[key] = value
+                setattr(user, key, value)
         user.save()
         return jsonify(user.to_dict()), 200
