@@ -45,7 +45,7 @@ def place_api(city_id):
                  methods=method)
 def place_by_id(place_id):
     """ just a discription"""
-    place = storage.get('Place', place_id)
+    place = storage.get(Place, place_id)
     if not place:
         abort(404)
 
