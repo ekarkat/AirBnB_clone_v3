@@ -22,17 +22,20 @@ def place_api(city_id):
             place_list.append(value.to_dict())
         return jsonify(place_list)
 
-#     if request.method == 'POST':
-#         data_json = request.get_json(force=True, silent=True)
-#         if not data_json:
-#             abort(400, "Not a JSON")
-#         if "email" not in data_json:
-#             abort(400, "Missing email")
-#         if "password" not in data_json:
-#             abort(400, "Missing password")
-#         user = User(**data_json)
-#         user.save()
-#         return jsonify(user.to_dict()), 201
+    if request.method == 'POST':
+        data_json = request.get_json(force=True, silent=True)
+        if not data_json:
+            abort(400, "Not a JSON")
+        if "user_id" not in data_json:
+            abort(400, "Missing user_id")
+        if "name" not in data_json:
+            abort(400, "Missing name")
+
+        if not storage.get('User', data_json.get("user_id")):
+            abort(404)
+        place = User(city_id=city_id, **data_json)
+        place.save()
+        return jsonify(place.to_dict()), 201
 
 
 @app_views.route('/places/<place_id>', strict_slashes=False,
