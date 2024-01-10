@@ -20,40 +20,41 @@ def amenity_api():
         return jsonify(am_dict)
 
     # if request.method == 'POST':
-    #     data_json = request.get_json(force=True, silent=True)
-    #     if not data_json:
+    #     data = request.get_json(force=True, silent=True)
+    #     if not data:
     #         abort(400, "Not a JSON")
-    #     if "name" not in data_json:
+    #     if "name" not in data:
     #         abort(400, "Missing name")
-    #     new_amen = Amenity(**data_json)
-    #     new_amen.save()
-    #     return jsonify(new_amen.to_dict()), 201
+    #     amen = Amenity(**data)
+    #     amen.save()
+    #     return jsonify(amen.to_dict()), 201
 
 
-@app_views.route("/amenities/<amenity_id>", strict_slashes=False,
-                 methods=methods_am)
-def amenities_by_id(amenity_id):
-    amen = storage.get('Amenity', amenity_id)
-    if not amen:
-        abort(404)
+# @app_views.route("/amenities/<amenity_id>", strict_slashes=False,
+#                  methods=methods_am)
+# def amenities_by_id(amenity_id):
+#     """ Amenity by id description """
+#     amen = storage.get('Amenity', amenity_id)
+#     if not amen:
+#         abort(404)
 
-    if request.method == 'GET':
-        return jsonify(amen.to_dict())
+#     if request.method == 'GET':
+#         return jsonify(amen.to_dict())
 
-    elif request.method == 'DELETE':
-        storage.delete(amen)
-        storage.save()
-        return jsonify({}), 200
+#     elif request.method == 'DELETE':
+#         storage.delete(amen)
+#         storage.save()
+#         return jsonify({}), 200
 
-    elif request.method == 'PUT':
-        json_data = request.get_json(force=True, silent=True)
-        if not json_data:
-            abort(400, "Not a JSON")
-        for key, value in json_data.items():
-            if key == 'id' or key == 'created_at'\
-                    or key == 'updated_at':
-                continue
-            else:
-                setattr(amen, key, value)
-        amen.save()
-        return jsonify(amen.to_dict()), 200
+#     elif request.method == 'PUT':
+#         json_data = request.get_json(force=True, silent=True)
+#         if not json_data:
+#             abort(400, "Not a JSON")
+#         for key, value in json_data.items():
+#             if key == 'id' or key == 'created_at'\
+#                     or key == 'updated_at':
+#                 continue
+#             else:
+#                 setattr(amen, key, value)
+#         amen.save()
+#         return jsonify(amen.to_dict()), 200
