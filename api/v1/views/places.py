@@ -17,8 +17,11 @@ def place_api(city_id):
     """ just a discription"""
     if request.method == 'GET':
         city = storage.get('City', city_id)
+        if city is None:
+            abort(404)
         place_list = []
-        for place in city.places:
+        places = city.places
+        for place in places:
             place_list.append(place.to_dict())
         return jsonify(place_list)
 
