@@ -54,11 +54,14 @@ def state_by_id(state_id):
         json_data = request.get_json(force=True, silent=True)
         if not json_data:
             abort(400, "Not a JSON")
+        print(state.name)
         for key, value in json_data.items():
             if key == 'id' or key == 'created_at'\
                     or key == 'updated_at':
                 continue
             else:
-                state.__dict__[key] = value
+                setattr(state, key, value)
+        # state.name = json_data.get("name")
+        print(state.name)
         state.save()
         return jsonify(state.to_dict()), 200
