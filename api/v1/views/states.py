@@ -62,6 +62,6 @@ def state_by_id(state_id):
             else:
                 setattr(state, key, value)
         # state.name = json_data.get("name")
-        print(state.name)
+        # print(state.name)
         state.save()
         return jsonify(state.to_dict()), 200
